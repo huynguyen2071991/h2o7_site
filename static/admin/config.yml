@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: huynguyen2071991/h2o7-site
+  repo: huynguyen2071991/h2o7_site
 
 media_folder: static/assets
 public_folder: assets
