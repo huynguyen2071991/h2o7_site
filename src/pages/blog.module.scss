@@ -1,0 +1,29 @@
+.blogList {
+  >li {
+    &:not(:last-child) {
+      margin-bottom: 40px;
+      border-bottom: 1px solid #ddd;
+    }
+  }
+
+  .blogItem {
+
+    >a {
+      border-radius: 5px;
+      padding: 20px;
+      display: block;
+      text-decoration: none;
+      transition: all .3s ease;
+      background: #f8f8f8;
+
+      &:hover {
+        background: #e4e4e4;
+      }
+    }
+
+    h2 {
+      color: #333;
+      font-weight: bold;
+    }
+  }
+}

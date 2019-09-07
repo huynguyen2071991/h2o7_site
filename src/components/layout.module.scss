@@ -1,0 +1,25 @@
+@charset "UTF-8";
+.mainBody {
+  padding-top: 3.5rem;
+}
+
+.mainContainer {
+  min-height: calc(100vh - 3.5rem);
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+
+  @media (min-width: 800px) {
+    padding-left: 10rem;
+  }
+}
+
+.pageContainer {
+  padding: 15px 15px 2.5rem;
+  margin-bottom: 50px;
+  
+  @media (min-width: 800px) {
+    padding: 40px 40px 2.5rem;
+    margin-bottom: 100px;
+  }
+}

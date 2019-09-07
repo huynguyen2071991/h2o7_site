@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+  <meta charset="UTF-8">
+  <title>{% PAGE_FULL_TITLE %}</title>
+  <meta name="description" content="{% DESCRIPTION %}">
+  <meta name="keywords" content="{% KEYWORDS %}">
+  <meta name="viewport" content="target-densitydpi=device-dpi, width=1190, maximum-scale=1.0, user-scalable=yes">
+  <meta name="format-detection" content="telephone=no"> {% SITE_FAVICON %}
+  <link rel="canonical" href="{% PAGE_FULL_URL %}">
+  <!-- ↓OGP↓-->
+  <meta property="og:title" content="{% PAGE_FULL_TITLE %}" />
+  <meta property="og:type" content="website" />
+  <meta property="og:description" content="{% DESCRIPTION %}" />
+  <meta property="og:url" content="{% PAGE_FULL_URL %}" /> {% IS_PAGE_OGP_IMAGE %}
+  <meta property="og:image" content="{% PAGE_OGP_IMAGE_URL %}" /> {% /IS_PAGE_OGP_IMAGE %} {% NO_PAGE_OGP_IMAGE %}
+  <meta property="og:image" content="{% SITE_URL %}user/media/frj_2019E/common/ogp.png" /> {% /NO_PAGE_OGP_IMAGE %}
+  <meta property="og:site_name" content="{% SITE_TITLE %}" />
+  <!-- ↑OGP↑ -->
+  <link rel="stylesheet" href="{% THEME_URL %}media/css/import.css">
+  <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.10/css/all.css">
+  <link rel="stylesheet" href="//unpkg.com/aos@next/dist/aos.css" />
+  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+  {% BLOCK NAME='ga' %}
+</head>
+
+<body>
+  <div id="fb-root"></div>
+  <script>
+    (function (d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s);
+      js.id = id;
+      js.src =
+        'https://connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v3.2&appId=859105060930498&autoLogAppEvents=1';
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  </script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <script src="{% THEME_URL %}media/js/common.js"></script>
+  <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+  <script>
+    $(function () {
+      $('.session-slider').slick({
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        infinite: true,
+        autoplay: true,
+        speed: 500,
+        autoplaySpeed: 2000,
+        variableWidth: true,
+        dots: true,
+        appendArrows: $('.slider-wrapper'),
+      });
+    });
+  </script>
+  <!-- Container -->
+  <div class="l-container"> {% BLOCK_HEADER %}
+    <!-- Main -->
+    <div class="l-main"> {% BLOCK_TOP %}{% PAGE %}{% BLOCK_BOTTOM %} </div>
+    <!-- /Main --> {% BLOCK_FOOTER %}
+  </div>
+  <!-- /Container -->
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.matchHeight/0.7.2/jquery.matchHeight-min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/object-fit-images/3.2.4/ofi.min.js"></script>
+  <script src="//unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      once: true
+    });
+  </script>
+  <script>
+    $(function () {
+      $('.session-slider .session-item .txt-wrapper').matchHeight();
+      $('.session-slider .session-item .txt-wrapper .intro').matchHeight();
+      $('.session-slider .session-item .txt-wrapper .name').matchHeight();
+      $('.session-slider .session-item .theme').matchHeight();
+      $('.voice-wrapper .voice-card').matchHeight();
+      $('.enjoy-box .head').matchHeight();
+      $('.enjoy-box .ttl').matchHeight();
+      $('.enjoy-box .txt').matchHeight();
+      objectFitImages('.session-slider .session-item img-cover .img-wrapper');
+      //SCROLL
+      $('#scroll-menu').hide();
+      $(window).scroll(function () {
+        $(window).scrollTop() <= $('#section01').position().top - 400 ? $('#scroll-menu').fadeOut() : $(
+          '#scroll-menu').fadeIn();
+      });
+      // cache the navigation links 
+      var $navigationLinks = $('#scroll-menu > li > a');
+      // cache (in reversed order) the sections
+      var $sections = $($("section").get().reverse());
+      // map each section id to their corresponding navigation link
+      var sectionIdTonavigationLink = {};
+      $sections.each(function () {
+        var id = $(this).attr('id');
+        sectionIdTonavigationLink[id] = $('#scroll-menu > li > a[href=\\#' + id + ']');
+      });
+      // throttle function, enforces a minimum time interval
+      function throttle(fn, interval) {
+        var lastCall, timeoutId;
+        return function () {
+          var now = new Date().getTime();
+          if (lastCall && now < (lastCall + interval)) {
+            // if we are inside the interval we wait
+            clearTimeout(timeoutId);
+            timeoutId = setTimeout(function () {
+              lastCall = now;
+              fn.call();
+            }, interval - (now - lastCall));
+          } else {
+            // otherwise, we directly call the function 
+            lastCall = now;
+            fn.call();
+          }
+        };
+      }
+
+      function highlightNavigation() {
+        // get the current vertical position of the scroll bar
+        var scrollPosition = $(window).scrollTop();
+        // iterate the sections
+        $sections.each(function () {
+          var currentSection = $(this);
+          // get the position of the section
+          var sectionTop = currentSection.offset().top;
+          // if the user has scrolled over the top of the section  
+          if (scrollPosition >= sectionTop) {
+            // get the section id
+            var id = currentSection.attr('id');
+            // get the corresponding navigation link
+            var $navigationLink = sectionIdTonavigationLink[id];
+            // if the link is not active
+            if (!$navigationLink.hasClass('active')) {
+              // remove .active class from all the links
+              $navigationLinks.parent('li').removeClass('selected');
+              // add .active class to the current link
+              $navigationLink.parent('li').addClass('selected');
+            }
+            // we have found our section, so we return false to exit the each loop
+            return false;
+          }
+        });
+      }
+      $(window).scroll(throttle(highlightNavigation, 100));
+      // if you don't want to throttle the function use this instead:
+      // $(window).scroll( highlightNavigation );
+    });
+  </script>
+</body>
+
+</html>

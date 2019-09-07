@@ -1,0 +1,25 @@
+// --------------------------------------------------
+// Footer
+// --------------------------------------------------
+@import '../styles/sass/settings';
+@import '../styles/sass/style/variable';
+@import '../styles/sass/core/mixins/utility';
+
+.footer {
+  border-top: 1px solid #f0f0f2;
+  width: 100%;
+  background: #ffff;
+  height: 2.5rem;
+  position: absolute;
+  bottom: 0;
+}
+
+.footerWrapper {
+  @include flex($a-items:center);
+  height: 100%;
+  padding: 0 15px;
+  margin: 0 auto;
+  @media (min-width: 800px) {
+    padding: 0 40px;
+  }
+}

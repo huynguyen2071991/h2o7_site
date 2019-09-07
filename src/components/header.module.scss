@@ -1,0 +1,62 @@
+// --------------------------------------------------
+// Header
+// --------------------------------------------------
+@import '../styles/sass/settings';
+@import '../styles/sass/style/variable';
+@import '../styles/sass/core/mixins/utility';
+
+.header {
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999;
+  border-bottom: 1px solid #f0f0f2;
+  position: fixed;
+  background: #fff;
+  height: 3.5rem;
+
+  h1 {
+    line-height: 1;
+  }
+
+  @media (min-width: 800px) {
+  }
+}
+
+.headerWrapper {
+  padding: 10px 15px;
+  @include flex($a-items:center);
+  height: 100%;
+}
+
+.globalNav {
+  .globalMenu {
+    @include flex;
+    >li {
+      &:not(:last-child) {
+        margin-right: 30px;
+      }
+    }
+    a {
+      text-decoration: none;
+      color: #333;
+      font: {
+        size: 16px;
+        weight: bold;
+      }
+    }
+  }
+}
+
+.logo {
+  margin-right: 30px;
+
+  >a {
+    text-decoration: none;
+    color: #333;
+    font: {
+      size: 30px;
+      weight: bold;
+    }
+  }
+}

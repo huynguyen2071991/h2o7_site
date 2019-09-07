@@ -1,0 +1,83 @@
+@charset "UTF-8";
+// --------------------------------------------------
+// Headings
+// --------------------------------------------------
+h3 {
+}
+h4 {
+}
+h5 {
+}
+
+// --------------------------------------------------
+// Table
+// --------------------------------------------------
+.overflow-table {
+  overflow-x: auto;
+}
+
+// --------------------------------------------------
+// Common
+// --------------------------------------------------
+//全体ホバー
+.hover-all {
+  position: relative;
+
+  >a {
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 9;
+  }
+}
+
+.pager {
+  @include pager01;
+}
+
+// --------------------------------------------------
+// slide-menu
+// --------------------------------------------------
+body {
+  width: 100%;
+  &.open {
+    position: fixed;
+    height: 100%;
+    overflow: hidden;
+  }
+  @if $header-fixed-pc {
+    padding-top: $header-height-pc;
+  }
+  @media only screen and (max-width: $screen-tb) {
+    @if $header-fixed-sp {
+      position: relative;
+      padding-top: $header-height-sp;
+    }
+    @else {
+      padding-top: 0;
+    }
+  }
+}
+
+.slide-menu {
+  position: fixed;
+  padding-top: $header-height-sp;
+  top: 0;
+  left: 100%;
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
+  z-index: 9998;
+  box-sizing: border-box;
+  background-color: #fff;
+  transition: left 0.3s;
+  @media only screen and (min-width: $screen-pc-min) {
+    display: none;
+  }
+  body.open & {
+    left: 0;
+  }
+}
